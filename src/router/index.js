@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/views/Login/Login.vue'
 
 Vue.use(VueRouter)
 
+//路由信息数组
 const routes = [
+  //登录页
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
-    component: Login
+    component: () => import('@v/Login/Login.vue')
   },
 ]
 

@@ -1,95 +1,104 @@
 <template>
-    <div class="login-container">
-        <el-form :model="ruleForm2" :rules="rules2"
-         status-icon
-         ref="ruleForm2" 
-         label-position="left" 
-         label-width="0px" 
-         class="demo-ruleForm login-page">
-            <h3 class="title">系统登录</h3>
-            <el-form-item prop="username">
-                <el-input type="text" 
-                    v-model="ruleForm2.username" 
-                    auto-complete="off" 
-                    placeholder="用户名"
-                ></el-input>
-            </el-form-item>
-                <el-form-item prop="password">
-                    <el-input type="password" 
-                        v-model="ruleForm2.password" 
-                        auto-complete="off" 
-                        placeholder="密码"
-                    ></el-input>
-                </el-form-item>
-            <el-checkbox 
-                v-model="checked"
-                class="rememberme"
-            >记住密码</el-checkbox>
-            <el-form-item style="width:100%;">
-                <el-button type="primary" style="width:100%;" @click="handleSubmit" :loading="logining">登录</el-button>
-            </el-form-item>
-        </el-form>
-    </div>
+  <div class="login-container">
+    <el-form
+      :model="ruleForm"
+      :rules="rules2"
+      status-icon
+      ref="ruleForm"
+      label-position="left"
+      label-width="0px"
+      class="demo-ruleForm login-page"
+    >
+      <h3 class="title">平台登录</h3>
+      <el-form-item prop="username">
+        <el-input
+          type="text"
+          v-model="ruleForm.username"
+          auto-complete="off"
+          placeholder="用户名"
+        ></el-input>
+      </el-form-item>
+      <el-form-item prop="password">
+        <el-input
+          type="password"
+          v-model="ruleForm.password"
+          auto-complete="off"
+          placeholder="密码"
+        ></el-input>
+      </el-form-item>
+      <el-checkbox v-model="checked" class="rememberme">记住密码</el-checkbox>
+      <el-form-item style="width: 100%">
+        <el-button
+          type="primary"
+          style="width: 100%"
+          @click="handleSubmit"
+          :loading="logining"
+          >登录</el-button
+        >
+      </el-form-item>
+    </el-form>
+  </div>
 </template>
 
 <script>
 export default {
-    data(){
-        return {
-            logining: false,
-            ruleForm2: {
-                username: 'admin',
-                password: '123456',
-            },
-            rules2: {
-                username: [{required: true, message: '请输入账号', trigger: 'blur'}],
-                password: [{required: true, message: '请输入密码', trigger: 'blur'}]
-            },
-            checked: false
-        }
-    },
-    mounted(){
+  data() {
+    return {
+      logining: false,
+      ruleForm: {
+        username: "admin",
+        password: "123456",
+      },
+      rules2: {
+        username: [{ required: true, message: "请输入账号", trigger: "blur" }],
+        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+      },
+      checked: false,
+    };
+  },
+  mounted() {
     //监听键盘按键事件
-         window.addEventListener('keydown',this.keyDown);
+    window.addEventListener("keydown", this.keyDown);
+  },
+  methods: {
+    keyDown(e) {
+      //如果是回车则执行登录方法
+      if (e.keyCode == 13) {
+        this.handleSubmit();
+      }
     },
-    methods: {
-        keyDown(e){
-        //如果是回车则执行登录方法
-            if(e.keyCode == 13){
-            this.handleSubmit();
-            }
-        },
-        handleSubmit(event){
-            this.$refs.ruleForm2.validate((valid) => {
-                if(valid){
-                    this.logining = true;
-                    if(this.ruleForm2.username === 'admin' && 
-                       this.ruleForm2.password === '123456'){
-                           this.logining = false;
-                           sessionStorage.setItem('user', this.ruleForm2.username);
-                           this.$router.push({path: '/'});
-                    }else{
-                        this.logining = false;
-                        this.$alert('账号或密码不正确!', '提示', {
-                            confirmButtonText: 'ok'
-                        })
-                    }
-                }else{
-                    console.log('error submit!');
-                    return false;
-                }
-            })
+    handleSubmit() {
+      this.$refs.ruleForm.validate((valid) => {
+        if (valid) {
+          this.logining = true;
+          if (
+            this.ruleForm.username === "admin" &&
+            this.ruleForm.password === "123456"
+          ) {
+            this.logining = false;
+            sessionStorage.setItem("user", this.ruleForm.username);
+            this.$router.push({ path: "/home" });
+          } else {
+            this.logining = false;
+            this.$alert("账号或密码不正确!", "提示", {
+              confirmButtonText: "确定",
+            });
+          }
+        } else {
+          console.log("error submit!");
+          return false;
         }
-    }
+      });
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .login-container {
-    width: 100%;
-    height: 100%;
-}
-.login-page {
+  width: 100%;
+  height: 100%;
+  .login-page {
     -webkit-border-radius: 5px;
     border-radius: 5px;
     margin: 180px auto;
@@ -98,9 +107,10 @@ export default {
     background: #fff;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
-}
-label.el-checkbox.rememberme {
+  }
+  label.el-checkbox.rememberme {
     margin: 0px 0px 15px;
     text-align: left;
+  }
 }
 </style>
