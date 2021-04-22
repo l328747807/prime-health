@@ -1,15 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
+//导入路由
 import router from './router'
+//导入状态管理
 import store from './store'
-import Axios from 'axios'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+//导入插件
+import './plugin'
 
-Vue.use(ElementUI);
-Vue.prototype.axios = Axios;
 Vue.config.productionTip = false;
-
 
 new Vue({
   router,
