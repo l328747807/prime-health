@@ -11,6 +11,12 @@ const routes = [
     name: 'Login',
     component: () => import('@v/Login/Login.vue')
   },
+  //登录页
+  {
+    path: '/Layout',
+    name: 'Layout',
+    component: () => import('@v/Layout/Layout.vue')
+  },
 ]
 
 const router = new VueRouter({

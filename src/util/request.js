@@ -10,7 +10,7 @@ let instance = axios.create({
     baseURL: 'https://some-domain.com/api/',
     // 设置超时时间
     timeout: 30000,
-    headers: {'X-Custom-Header': 'foobar'}
+    headers: {'token': '74ce4a21f159e81638334cbe243cd2cf'}
 });
 
 // 添加请求拦截器
@@ -46,8 +46,15 @@ let post = async function(url ,params){
     return data
 }
 
+
+//封装设置token信息到请求头的方法
+let setToken = function(){
+    instance.defaults.headers.common['token'] = sessionStorage.getItem('token');
+}
+
 //导出方法
 export {
     get,
     post,
+    setToken
 }

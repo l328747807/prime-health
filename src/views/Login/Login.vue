@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import {str2Md5} from '@/util/md5.js'
 export default {
   data() {
     return {
@@ -68,19 +69,23 @@ export default {
       }
     },
     handleSubmit() {
+      let _this = this;
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          this.logining = true;
+          _this.logining = true;
           if (
-            this.ruleForm.username === "admin" &&
-            this.ruleForm.password === "123456"
+            _this.ruleForm.username === "admin" &&
+            _this.ruleForm.password === "123456"
           ) {
-            this.logining = false;
-            sessionStorage.setItem("user", this.ruleForm.username);
-            this.$router.push({ path: "/home" });
+            let token = str2Md5(_this.ruleForm.password);
+            sessionStorage.setItem("token", token);
+            _this.logining = false;
+            //设置请求头的token信息
+            _this.$setToken();
+            _this.$router.push({ path: "/Layout" });
           } else {
-            this.logining = false;
-            this.$alert("账号或密码不正确!", "提示", {
+            _this.logining = false;
+            _this.$alert("账号或密码不正确!", "提示", {
               confirmButtonText: "确定",
             });
           }
@@ -107,6 +112,10 @@ export default {
     background: #fff;
     border: 1px solid #eaeaea;
     box-shadow: 0 0 25px #cac6c6;
+    .title{
+      text-align: center;
+      height:40px;
+    }
   }
   label.el-checkbox.rememberme {
     margin: 0px 0px 15px;
