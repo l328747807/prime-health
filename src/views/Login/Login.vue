@@ -14,6 +14,7 @@
         <el-input
           type="text"
           v-model="ruleForm.username"
+          prefix-icon="el-icon-user"
           auto-complete="off"
           placeholder="用户名"
         ></el-input>
@@ -22,6 +23,7 @@
         <el-input
           type="password"
           v-model="ruleForm.password"
+          prefix-icon="el-icon-lock"
           auto-complete="off"
           placeholder="密码"
         ></el-input>

@@ -7,7 +7,7 @@ import axios from 'axios'
 
 let instance = axios.create({
     // 设置接口地址根路径
-    baseURL: 'https://some-domain.com/api/',
+    baseURL: 'http://172.22.0.100:38080/app-api/',
     // 设置超时时间
     timeout: 30000,
     headers: {'token': '74ce4a21f159e81638334cbe243cd2cf'}

@@ -11,11 +11,17 @@ const routes = [
     name: 'Login',
     component: () => import('@v/Login/Login.vue')
   },
-  //登录页
+  //搜索首页
   {
     path: '/Layout',
     name: 'Layout',
     component: () => import('@v/Layout/Layout.vue')
+  },
+  //搜索详情页
+  {
+    path: '/report',
+    name: 'report',
+    component: () => import('@v/report/report.vue')
   },
 ]
 
